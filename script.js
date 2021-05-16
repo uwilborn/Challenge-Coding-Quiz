@@ -1,9 +1,44 @@
 const quizContainer = document.getElementById('quiz');
 const resultsContainer = document.getElementById('results');
-const submitButton = document.getElementById('submit');
+var submitButton = document.getElementById('submit');
+var start = document.getElementById('start');
+var quizQuestion = document.createElement("div");
+var listofAns = document.createElement("ol");
+var answerA = document.createElement("li");// Create ordered list items
+var answerB = document.createElement("li");
+var answerC = document.createElement("li");
+var answerD = document.createElement("li");
+
+  //Timer for quiz
+  var timerCounter = document.getElementById('counter');
+  var secondsLeft = 10;
+  
+  function setTimer() {
+// Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
+    var timerInterval = setInterval(function() {
+// Decrement `secondsLeft` by 1
+        secondsLeft--; 
+    // Set the `textContent` of `timerCounter` to show the remaining seconds
+      timerCounter.textContent = secondsLeft + "seconds";
+  // As long as the `secondsLeft` is greater than 0
+      if(secondsLeft === 0) {
+        // Stops execution of action at set interval
+        clearInterval(timerInterval);
+      }
+  
+    }, 1000);
+  }
+
+  setTimer();
+
+//   function startQuiz () {
+//     setTimer();
+//     nextQuestion();
+// }
+
+//Array of Questions for quiz with objects for answers
 
 
-//Questions for quiz
 const myQuestions = [
     {
       question: "Who invented JavaScript?",
@@ -35,62 +70,27 @@ const myQuestions = [
     }
   ];
 
-  //Timer for quiz
+  function nextQuestion () {
+    for(var i = 0; i < myQuestions.length; i++){
+      
+quizQuestion.textContent = myQuestions.question[i];// Add text for list items
+answerA.textContent = myQuestions.answers.a[i];
+answerB.textContent = myQuestions.answers.b[i];
+answerC.textContent = myQuestions.answers.c[i];
+answerD.textContent = myQuestions.answers.d[i];
 
-  var secondsLeft = 10;
-
-  function setTimer() {
-    // Sets interval in variable
-    var timerInterval = setInterval(function() {
-      secondsLeft--;
-      timeEl.textContent = secondsLeft;
-  
-      if(secondsLeft === 0) {
-        // Stops execution of action at set interval
-        clearInterval(timerInterval);
-        
-        console.log("Time is up.")
-      }
-  
-    }, 1000);
-  }
-
-  function startQuiz () {
-    setTimer();
-    nextQuestion();
-}
-
-var quizIndex = 1
-
-function nextQuestion () {
-    quizIndex.innerHTML = '';
-    
-
-}
-
-// Create ordered list element
-var listofAns = document.createElement("ol");
-
-// Create ordered list items
-var answerA = document.createElement("li");
-var answerB = document.createElement("li");
-var answerC = document.createElement("li");
-var answerD = document.createElement("li");
-
-// Add text for list items
-answerA.textContent = myQuestions.answers.a
-answerB.textContent = myQuestions.answers.b
-answerC.textContent = myQuestions.answers.c
-answerD.textContent = myQuestions.answers.d
-
-// Append ordered list 
-favoriteEl.appendChild(listofAns);
-
-// Append list items to ordered list element 
+quizQuestion.append(listofAns); // Append list items to ordered list element 
 listofAns.append(answerA);
 listofAns.append(answerB);
 listofAns.append(answerC);
-listofAns.append(answerD);
+listofAns.append(answerD);}
+
+}
+
+nextQuestion
 
 
+
+// upon clicking start button
+// startQuiz.addEventListener('click', nextQuestion);
 
