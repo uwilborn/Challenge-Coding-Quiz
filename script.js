@@ -27,7 +27,7 @@ function setTimer() {
   }, 1000);
 }
 
-setTimer();
+
 
 
 
@@ -108,7 +108,5 @@ getQuestion(i);
 
 
 
-
-
 // upon clicking start button
-start.addEventListener("click",nextQuestion);
+start.addEventListener("click",nextQuestion,setTimer());
