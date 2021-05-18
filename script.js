@@ -1,96 +1,114 @@
-const quizContainer = document.getElementById('quiz');
-const resultsContainer = document.getElementById('results');
-var submitButton = document.getElementById('submit');
-var start = document.getElementById('start');
-var quizQuestion = document.createElement("div");
-var listofAns = document.createElement("ol");
-var answerA = document.createElement("li");// Create ordered list items
-var answerB = document.createElement("li");
-var answerC = document.createElement("li");
-var answerD = document.createElement("li");
+// select all elements
 
-  //Timer for quiz
-  var timerCounter = document.getElementById('counter');
-  var secondsLeft = 10;
-  
-  function setTimer() {
-// Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
-    var timerInterval = setInterval(function() {
-// Decrement `secondsLeft` by 1
-        secondsLeft--; 
+const start = document.getElementById("start");
+const quiz = document.getElementById("quiz");
+const question = document.getElementById("question");
+
+
+
+
+//TIMER FOR QUIZ
+var timerCounter = document.getElementById('counter');
+var secondsLeft = 10;
+
+function setTimer() {
+  // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
+  var timerInterval = setInterval(function () {
+    // Decrement `secondsLeft` by 1
+    secondsLeft--;
     // Set the `textContent` of `timerCounter` to show the remaining seconds
-      timerCounter.textContent = secondsLeft + "seconds";
-  // As long as the `secondsLeft` is greater than 0
-      if(secondsLeft === 0) {
-        // Stops execution of action at set interval
-        clearInterval(timerInterval);
-      }
-  
-    }, 1000);
-  }
+    timerCounter.textContent = secondsLeft + "seconds";
+    // As long as the `secondsLeft` is greater than 0
+    if (secondsLeft === 0) {
+      // Stops execution of action at set interval
+      clearInterval(timerInterval);
+    }
 
-  setTimer();
+  }, 1000);
+}
 
-//   function startQuiz () {
-//     setTimer();
-//     nextQuestion();
-// }
+setTimer();
+
+
 
 //Array of Questions for quiz with objects for answers
 
 
-const myQuestions = [
-    {
-      question: "Who invented JavaScript?",
-      answers: {
-        a: "Douglas Crockford",
-        b: "Sheryl Sandberg",
-        c: "Brendan Eich"
-      },
-      correctAnswer: "c"
-    },
-    {
-      question: "Which one of these is a JavaScript package manager?",
-      answers: {
-        a: "Node.js",
-        b: "TypeScript",
-        c: "npm"
-      },
-      correctAnswer: "c"
-    },
-    {
-      question: "Which tool can you use to ensure code quality?",
-      answers: {
-        a: "Angular",
-        b: "jQuery",
-        c: "RequireJS",
-        d: "ESLint"
-      },
-      correctAnswer: "d"
+let challengeQuestions = [
+  {
+    question: "Which of the following is correct about features of JavaScript?",
+    answers: {
+      a: "JavaScript is complementary to and integrated with HTML",
+      b: "JavaScript is open and cross-platform",
+      c: "Both of the above",
+      d: "All of the above.",
+      correct: "Both of the above",
     }
-  ];
+  },
 
-  function nextQuestion () {
-    for(var i = 0; i < myQuestions.length; i++){
-      
-quizQuestion.textContent = myQuestions.question[i];// Add text for list items
-answerA.textContent = myQuestions.answers.a[i];
-answerB.textContent = myQuestions.answers.b[i];
-answerC.textContent = myQuestions.answers.c[i];
-answerD.textContent = myQuestions.answers.d[i];
+  {
+    question: "Which of the following is a valid type of function javascript supports?",
+    answers: {
+      a: "named function",
+      b: "anonymous function",
+      c: "Both of the above",
+      d: "All of the above.",
+      correct: "named function",
+    }
+  },
 
-quizQuestion.append(listofAns); // Append list items to ordered list element 
+  {
+    question: "Which of the following is correct about callbacks?",
+    answers: {
+      a: "A callback is a plain JavaScript function passed to some method as an argument or option.",
+      b: "Some callbacks are just events, called to give the user a chance to react when a certain state is triggered.",
+      c: "Both of the above",
+      d: "None of the above.",
+      correct: "None of the above",
+
+    }
+  }
+];
+
+
+
+var questionIndex = 0
+var lastQuestion = challengeQuestions.length - 1;
+
+//Create current question, 
+function getQuestion(questionIndex){
+  
+quiz.textContent =  challengeQuestions[questionIndex].question
+
+var listofAns = document.createElement("ol");
+var answerA = document.createElement("li");
+var answerB = document.createElement("li");
+var answerC = document.createElement("li");
+var answerD = document.createElement("li");
+
+answerA.textContent = challengeQuestions[questionIndex].answers.a;
+answerB.textContent = challengeQuestions[questionIndex].answers.b;
+answerC.textContent = challengeQuestions[questionIndex].answers.c;
+answerD.textContent = challengeQuestions[questionIndex].answers.d;
+
 listofAns.append(answerA);
 listofAns.append(answerB);
 listofAns.append(answerC);
-listofAns.append(answerD);}
+listofAns.append(answerD);
 
+quiz.append(listofAns); }
+
+
+function nextQuestion(){
+  for(var i = 0; i < lastQuestion; i++){
+questionIndex = i;
+getQuestion(i);
+  }
 }
 
-nextQuestion
+
 
 
 
 // upon clicking start button
-// startQuiz.addEventListener('click', nextQuestion);
-
+start.addEventListener("click",nextQuestion);
