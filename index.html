@@ -5,51 +5,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="./style.css" />
     <title>Timed Coding Quiz</title>
 
-    <style>
-        p {
-            text-align: center;
-            font-size: 60px;
-            margin-top: 0px;
-        }
-        div {
-            text-align: center;
-            font-size: 30px;
-            margin-top: 10px;
-        }
-        ol {
-            list-style-type: lower-alpha;
-            font-size: 30px;
-            margin-top: 10px;
-            text-align: center;
-        }
-        
-    </style>
 </head>
 
 
 <body>
 
-<p id="counter"></p>
+    <p id="counter">TIMER</p>
+    <p id="rules"> Welcome to the Javascript Challenge Quiz!! Click the START button below to Begin!</p>
 
+    <button id="start">START</button>
 
-<button id="start">START</button>
- 
-
-         
-        <div id="quiz">
-
-            
-            </div>
 
         
+ <h4>Current Score: <span id="score">0</span></h4>
+              
+   <div id="quiz"></div>  
+   <div id="finalscore"></div>         
 
-   <script src="./script.js"></script>
+       <script src="./script.js"></script>
 
 
-  
+
 
 </body>
-</html>
 
+</html>

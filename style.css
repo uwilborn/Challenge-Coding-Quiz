@@ -1,0 +1,54 @@
+#counter {
+    position: absolute;
+    right: 10%;
+    top: 1%;
+    font-size: 40px;
+    margin-top: 0%;
+    border: 5px solid red;
+    
+}
+
+#rules {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 5%;
+}
+
+#start {
+    position: absolute;
+    right: 50%;
+    font-size: 30px;
+    margin-top: 10px;
+    background-color: blue;
+    color: black;
+}
+
+div {
+    text-align: center;
+    font-size: 30px;
+    margin-top: 10px;
+}
+
+ol {
+    list-style-type: lower-alpha;
+    font-size: 30px;
+    margin-top: 10px;
+    text-align: center;
+  
+}
+
+#quiz {
+    position: absolute;
+    right:30%;
+}
+
+h4 {
+    font-size: 30px;
+    float: left;
+    border: 5px double black;
+    position: absolute;
+    left: 10%;
+    top: 1%;
+    margin-top: 0%;
+
+}
