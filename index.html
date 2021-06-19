@@ -17,13 +17,31 @@
     <p id="rules"> Welcome to the Javascript Challenge Quiz!! Click the START button below to Begin!</p>
 
     <button id="start">START</button>
-
-
+   
         
  <h4>Current Score: <span id="score">0</span></h4>
               
    <div id="quiz"></div>  
-   <div id="finalscore"></div>         
+
+   <div id="finalscore"></div>  
+   
+   <div id="saveQuiz" class="card" hidden>
+    <h2>Enter Your score and your Initials</h2>
+    <form>
+      <ul>
+        <li>
+          <label for="name">Student Name</label>
+          <textarea id="msg" name="initials"></textarea>
+        </li>
+        <li>
+          <label for="grade">Final Score</label>
+          <textarea id="msg" name="Final Score"></textarea>
+          </select>
+        </li>
+        </ul>
+      <button id="save">SAVE</button>
+    </form>    
+  </div>
 
        <script src="./script.js"></script>
 

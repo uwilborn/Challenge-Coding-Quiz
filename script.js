@@ -7,10 +7,13 @@ const message = document.createElement("p")
 const message2 = document.createElement("p")
 const finalscore = document.getElementById("finalscore");
 const rules = document.getElementById("rules");
+const next = document.createElement("button")
+const save = document.createElement("button")
+const savequiz = document.getElementById("saveQuiz");
 
 //TIMER FOR QUIZ
 var timerCounter = document.getElementById('counter');
-var secondsLeft = 30;
+var secondsLeft = 10;
 
 function setTimer() {
   // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
@@ -22,10 +25,11 @@ function setTimer() {
     // As long as the `secondsLeft` is greater than 0
     if (secondsLeft === 0) {
       // Stops execution of action at set interval
-      clearInterval(timerInterval);
+      endTest();
+      clearInterval(timerInterval)    
     }
-
   }, 1000);
+  
 }
 
 
@@ -150,13 +154,14 @@ let challengeQuestions = [
 
 
 var questionIndex = 0
-var lastQuestion = challengeQuestions.length - 1;
+var lastQuestion = challengeQuestions.length;
 
 //Create current question, 
 function getQuestion(){
-
+  
   start.style.display='none';
   rules.innerHTML = "";
+
   
 quiz.textContent =  challengeQuestions[questionIndex].question
 
@@ -183,41 +188,70 @@ listofAns.append(answerD);
 
 quiz.append(listofAns); }
 
-
+//Starts Test upon clicking the start button
 function nextQuestion(){
   setTimer();
 getQuestion();
 
-  }
+}
 
 
   //Score Counter Process
 let score = 0;
 var countEl = document.querySelector("#score");
 
+
 // Updates count on page
 function setCounterText() {
   countEl.textContent = score;
+  
 }
 
-function handleAnswer(event){
-message.textContent = ""
-// console.log("click");
-// console.log(event.target.innerText);
-if(event.target.innerText === challengeQuestions[questionIndex].answers.correct){
-score++;
-setCounterText();
-  questionIndex++;
-  getQuestion();
-} else{ 
-    //console.log("Wrong Answer")
-  message.textContent = "Wrong Answer, click again. Time reduced by 3 seconds."
+
+//Handle if answer is correct
+function righthandleAnswer(){
+  message.textContent = "Correct Answer!"
+    quiz.append(message)
+    score++;
+  setCounterText();
+    questionIndex++;
+  
+  next.innerHTML='NEXT QUESTION'; 
+  next.style.display='block'; 
+  quiz.append(next)      
+  }
+
+
+//Handle if answer is wrong
+function wronghandleAnswer(){
+  message.textContent = "Wrong Answer:)! Time was reduced by 3 seconds."
   quiz.append(message)
-secondsLeft = secondsLeft - 3;
-handleAnswer()
-}
+      questionIndex++;
+      secondsLeft = secondsLeft - 3;
+    next.innerHTML='NEXT QUESTION'; 
+  next.style.display='block'; 
+  quiz.append(next)     
+  }
+  
+  //Function for determining if the answer is right or wrong
+  function handleAnswer(event){
+    message.textContent = ""
+    if(event.target.innerText === challengeQuestions[questionIndex].answers.correct){
+         righthandleAnswer(); 
+         endTest();            
+    } else{ 
+     wronghandleAnswer();  
+    }}
 
+//End Test
+function endTest(){
+  if( secondsLeft < 1){
+    quiz.innerText=" TEST OVER";
+    savequiz.classList.remove("hidden");
+  }
 }
-
+ 
+  
 // upon clicking start button
 start.addEventListener("click",nextQuestion);
+next.addEventListener("click",getQuestion);
