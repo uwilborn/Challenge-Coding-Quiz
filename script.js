@@ -13,7 +13,7 @@ const savequiz = document.getElementById("saveQuiz");
 
 //TIMER FOR QUIZ
 var timerCounter = document.getElementById('counter');
-var secondsLeft = 10;
+var secondsLeft = 60;
 
 function setTimer() {
   // Use the `setInterval()` method to call a function to be executed every 1000 milliseconds
@@ -154,15 +154,14 @@ let challengeQuestions = [
 
 
 var questionIndex = 0
-var lastQuestion = challengeQuestions.length;
+var lastQuestion = challengeQuestions.length-1;
 
 //Create current question, 
 function getQuestion(){
   
   start.style.display='none';
   rules.innerHTML = "";
-
-  
+  endTest2();
 quiz.textContent =  challengeQuestions[questionIndex].question
 
 var listofAns = document.createElement("ol");
@@ -218,7 +217,8 @@ function righthandleAnswer(){
   
   next.innerHTML='NEXT QUESTION'; 
   next.style.display='block'; 
-  quiz.append(next)      
+  quiz.append(next)   
+   
   }
 
 
@@ -227,31 +227,57 @@ function wronghandleAnswer(){
   message.textContent = "Wrong Answer:)! Time was reduced by 3 seconds."
   quiz.append(message)
       questionIndex++;
-      secondsLeft = secondsLeft - 3;
+     secondsLeft = secondsLeft - 3;
     next.innerHTML='NEXT QUESTION'; 
   next.style.display='block'; 
-  quiz.append(next)     
+  quiz.append(next) 
+      
   }
   
   //Function for determining if the answer is right or wrong
   function handleAnswer(event){
     message.textContent = ""
     if(event.target.innerText === challengeQuestions[questionIndex].answers.correct){
-         righthandleAnswer(); 
-         endTest();            
+         righthandleAnswer();            
     } else{ 
      wronghandleAnswer();  
     }}
 
 //End Test
 function endTest(){
-  if( secondsLeft < 1){
+  if(secondsLeft === 0){
     quiz.innerText=" TEST OVER";
-    savequiz.classList.remove("hidden");
-  }
+    savequiz.hidden=false;
+ }
 }
  
-  
+function endTest2(){
+  if(questionIndex > lastQuestion){
+    quiz.innerText=" TEST OVER";
+    timerCounter.textContent = "TIMER: " + " Done";
+    savequiz.hidden=false;
+ }
+}
+
+
+
+// function renderMessage() {
+//   const comment = document.getElementById("msg");
+//   const userText = comment.value;
+//   localStorage.setItem("msg", JSON.stringify(userText));
+//   const displayText = JSON.parse(localStorage.getItem("msg"));
+//   const textArea1 = document.getElementById("msg")
+//   textArea1.value = displayText;
+//   quiz.append(displayText);
+//   }
+
+
 // upon clicking start button
 start.addEventListener("click",nextQuestion);
 next.addEventListener("click",getQuestion);
+
+// save.addEventListener("click", renderMessage);
+
+
+
+
